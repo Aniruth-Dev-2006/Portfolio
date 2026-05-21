@@ -523,7 +523,7 @@ const LandingPage = () => {
     <main className="flex-1 overflow-y-auto overflow-x-hidden bg-[#050505] bg-grid-pattern relative">
       <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/80 via-transparent to-[#050505] pointer-events-none z-0"></div>
 
-      <div className="max-w-[1400px] w-full mx-auto px-6 lg:px-10 pt-8 pb-12 relative z-10 min-h-full">
+      <div className="max-w-[1800px] w-full mx-auto px-6 lg:px-10 pt-8 pb-12 relative z-10 min-h-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 flex-1">
           <div className="lg:col-span-7 xl:col-span-8 flex flex-col justify-start z-20 w-full pr-0 lg:pr-4">
             <div className="space-y-3 mb-8 relative">
@@ -626,7 +626,7 @@ const AboutPage = () => {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-10 space-y-8 relative z-10 pt-16">
+      <div className="max-w-[1800px] w-full mx-auto px-6 lg:px-12 py-10 space-y-8 relative z-10 pt-16">
 
         {/* Restored Original About Content with VS Code Theme */}
         <div className="space-y-4 pt-4">

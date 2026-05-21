@@ -67,7 +67,7 @@ const ContactPage = () => {
       {/* Background ambient glow - Neutral white/gray */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,_#ffffff_0%,_transparent_50%)] opacity-[0.02] pointer-events-none"></div>
 
-      <div className="w-full max-w-6xl mx-auto h-[85vh] md:h-[75vh] flex flex-col lg:flex-row rounded-xl border border-[#222] bg-[#0a0a0a] shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden z-10 relative">
+      <div className="w-full max-w-[1800px] mx-auto h-[85vh] md:h-[75vh] flex flex-col lg:flex-row rounded-xl border border-[#222] bg-[#0a0a0a] shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden z-10 relative">
         
         {/* LEFT PANE: JSON View */}
         <div className="w-full lg:w-[40%] h-[40%] lg:h-full border-b lg:border-b-0 lg:border-r border-[#222] flex flex-col bg-[#050505]">
