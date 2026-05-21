@@ -518,14 +518,21 @@ const ContactFooter = () => (
 // --- LANDING PAGE (index.tsx) ---
 const LandingPage = () => {
   const [typingKey, setTypingKey] = useState(0);
-  useEffect(() => setTypingKey(prev => prev + 1), []);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  useEffect(() => {
+    setTypingKey(prev => prev + 1);
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <main className="flex-1 overflow-y-auto overflow-x-hidden bg-[#050505] bg-grid-pattern relative">
       <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/80 via-transparent to-[#050505] pointer-events-none z-0"></div>
 
       <div className="max-w-[1800px] w-full mx-auto px-6 lg:px-10 pt-8 pb-12 relative z-10 min-h-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 flex-1 mb-10 lg:mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 flex-1 mb-10 lg:mb-12 xl:mb-20">
           <div className="lg:col-span-7 xl:col-span-8 flex flex-col justify-start z-20 w-full pr-0 lg:pr-4">
             <div className="space-y-3 mb-8 relative">
               <div className="text-[#8b949e] font-mono text-sm flex items-center gap-2 mb-2">
@@ -597,9 +604,9 @@ const LandingPage = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-5 xl:col-span-4 relative min-h-[500px] xl:min-h-[550px] pointer-events-none z-30 flex justify-center items-start mt-10 lg:-mt-10 xl:-mt-16">
-            <div className="absolute top-0 w-full max-w-[350px] mx-auto h-[500px] xl:h-[600px] flex justify-center pointer-events-auto">
-              <Lanyard position={[0, 0, 16]} gravity={[0, -40, 0]} cardImage="/profile.jpeg" />
+          <div className="lg:col-span-5 xl:col-span-4 relative h-[400px] lg:h-[500px] 2xl:h-[650px] lg:-mt-5 2xl:-mt-10 pointer-events-none z-30 flex justify-center items-start mt-4 lg:mt-0">
+            <div className="absolute inset-0 w-full h-full flex justify-center pointer-events-auto">
+              <Lanyard key="lanyard-universal-perfect" position={[0, 2, 12.5]} gravity={[0, -40, 0]} cardImage="/profile.jpeg" ropeLength={1} />
             </div>
           </div>
         </div>

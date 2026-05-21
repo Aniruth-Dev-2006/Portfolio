@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unknown-property */
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
-import { Canvas, extend, useFrame } from '@react-three/fiber';
-import { useGLTF, useTexture } from '@react-three/drei';
+import { Canvas, extend, useFrame, useThree } from '@react-three/fiber';
+import { useGLTF, useTexture, Environment } from '@react-three/drei';
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint } from '@react-three/rapier';
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 
@@ -11,7 +11,7 @@ import './Lanyard.css';
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
-export default function Lanyard({ position = [0, 0, 16], gravity = [0, -40, 0], fov = 20, transparent = true, cardImage = null }) {
+export default function Lanyard({ position = [0, 0, 16], gravity = [0, -40, 0], fov = 20, transparent = true, cardImage = null, ropeLength = 0.5 }) {
   const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768);
 
   useEffect(() => {
@@ -21,24 +21,27 @@ export default function Lanyard({ position = [0, 0, 16], gravity = [0, -40, 0], 
   }, []);
 
   return (
-    <div className="lanyard-wrapper">
+    <div className="w-full h-full relative z-30 pointer-events-none">
       <Canvas
         camera={{ position: position, fov: fov }}
-        dpr={[1, isMobile ? 1.5 : 2]}
-        gl={{ alpha: transparent }}
-        onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
+        gl={{ alpha: true, antialias: true, preserveDrawingBuffer: true }}
+        className="pointer-events-auto"
+        onCreated={({ gl }) => {
+          gl.setClearColor(0x000000, 0);
+        }}
       >
         <ambientLight intensity={2} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
-        <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
-          <Band isMobile={isMobile} cardImage={cardImage} />
+        <Physics interpolate gravity={gravity} timeStep={1 / 60}>
+          <Band transparent={transparent} cardImage={cardImage} ropeLength={ropeLength} />
         </Physics>
+        <Environment preset="city" />
       </Canvas>
     </div>
   );
 }
 
-function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, cardImage = null }) {
+function Band({ maxSpeed = 50, minSpeed = 10, transparent = true, cardImage = null, ropeLength = 0.5 }) {
   const band = useRef(),
     fixed = useRef(),
     j1 = useRef(),
@@ -49,8 +52,46 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, cardImage = null 
     ang = new THREE.Vector3(),
     rot = new THREE.Vector3(),
     dir = new THREE.Vector3();
-  const segmentProps = { type: 'dynamic', canSleep: true, colliders: false, angularDamping: 4, linearDamping: 4 };
+  const segmentProps = { type: 'dynamic', canSleep: true, colliders: false, angularDamping: 2, linearDamping: 2 };
   const { nodes, materials } = useGLTF('/card.glb');
+  
+  // Create a profile material if image is provided
+  const profileTexture = cardImage ? useTexture(cardImage) : null;
+  if (profileTexture) {
+    profileTexture.wrapS = THREE.RepeatWrapping;
+    profileTexture.wrapT = THREE.RepeatWrapping;
+  }
+
+
+  const [cursorHovered, setCursorHovered] = useState(false);
+
+  useEffect(() => {
+    if (cursorHovered) {
+      document.body.style.cursor = 'grab';
+    } else {
+      document.body.style.cursor = 'auto';
+    }
+    return () => {
+      document.body.style.cursor = 'auto';
+    };
+  }, [cursorHovered]);
+
+  const { width, height } = useThree((state) => state.size);
+  const [curve] = useState(
+    () =>
+      new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()])
+  );
+  const [dragged, drag] = useState(false);
+  const [hovered, hover] = useState(false);
+
+  useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], ropeLength]);
+  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], ropeLength]);
+  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], ropeLength]);
+  useSphericalJoint(j3, card, [
+    [0, 0, 0],
+    [0, 1.5, 0]
+  ]);
+
   const texture = useTexture('/lanyard.png');
   const photoTexture = useTexture(cardImage || '/lanyard.png');
   
@@ -84,20 +125,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, cardImage = null 
     }
   }
 
-  const [curve] = useState(
-    () =>
-      new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()])
-  );
-  const [dragged, drag] = useState(false);
-  const [hovered, hover] = useState(false);
 
-  useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
-  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
-  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
-  useSphericalJoint(j3, card, [
-    [0, 0, 0],
-    [0, 1.5, 0]
-  ]);
 
   useEffect(() => {
     if (hovered) {
@@ -127,7 +155,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, cardImage = null 
       curve.points[1].copy(j2.current.lerped);
       curve.points[2].copy(j1.current.lerped);
       curve.points[3].copy(fixed.current.translation());
-      band.current.geometry.setPoints(curve.getPoints(isMobile ? 16 : 32));
+      band.current.geometry.setPoints(curve.getPoints(32));
       ang.copy(card.current.angvel());
       rot.copy(card.current.rotation());
       card.current.setAngvel({ x: ang.x, y: ang.y - rot.y * 0.25, z: ang.z });
@@ -167,7 +195,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, cardImage = null 
               <group>
                 {/* White card border using original GLB geometry */}
                 <mesh geometry={nodes.card.geometry}>
-                  <meshBasicMaterial color="#ffffff" toneMapped={false} />
+                  <meshBasicMaterial map={materials.base.map} toneMapped={false} />
                 </mesh>
                 {/* Photo inset inside the border */}
                 <mesh position={[cardBounds.cx, cardBounds.cy, 0.01]}>
@@ -190,7 +218,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, cardImage = null 
         <meshLineMaterial
           color="white"
           depthTest={false}
-          resolution={isMobile ? [1000, 2000] : [1000, 1000]}
+          resolution={[1000, 1000]}
           useMap
           map={texture}
           repeat={[-4, 1]}
