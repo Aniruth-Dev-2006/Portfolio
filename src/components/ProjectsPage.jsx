@@ -5,7 +5,7 @@ const ProjectsPage = () => {
   const projects = [
     {
       title: "Luvara",
-      description: "AI Studio full-stack application built to instantly deploy custom AI agents. Connect to various models, configure personalities, and embed anywhere.",
+      description: "An advanced AI-powered drug repurposing platform leveraging multi-agent orchestration to accelerate pharmaceutical research, analyze molecular structures, and identify novel therapeutic applications.",
       tech: "React, Node.js, AI Studio",
       features: ["Custom AI Agents", "Embeddable widgets", "Model routing"],
       github: "https://github.com/dinesh4o/Blueprints",
@@ -29,7 +29,7 @@ const ProjectsPage = () => {
     },
     {
       title: "Lawbridge (i-Cube)",
-      description: "Intelligent legal assistant powered by Retrieval Augmented Generation (RAG) technology using Gemini LLM to answer Indian cybercrime queries.",
+      description: "Intelligent legal assistant powered by RAG technology and Gemini LLM, designed to answer all general legal questions with a highly specialized focus on Indian cybercrime law.",
       tech: "React, Node.js, Python, RAG",
       features: ["Vector Search", "Gemini LLM", "Source Citations", "OAuth"],
       github: "https://github.com/Aniruth-Dev-2006/i-Cube",

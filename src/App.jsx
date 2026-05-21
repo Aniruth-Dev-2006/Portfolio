@@ -544,7 +544,6 @@ const LandingPage = () => {
                 <span className="cursor-blink"></span>
               </div>
             </div>
-
             <div className="flex flex-col xl:flex-row gap-5 w-full mb-5">
               <SpotlightCard className="flex-1 min-h-[240px] z-20">
                 <InteractiveJsonCard />
@@ -553,7 +552,6 @@ const LandingPage = () => {
                 <InteractiveTerminal />
               </SpotlightCard>
             </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
               <SpotlightCard className="p-5 flex flex-col justify-between group min-h-[140px] z-20">
                 <div className="flex items-center justify-between mb-2">
