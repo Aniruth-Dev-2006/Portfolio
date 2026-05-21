@@ -5,7 +5,7 @@ const ProjectsPage = () => {
   const projects = [
     {
       title: "Luvara",
-      description: "An advanced AI-powered drug repurposing platform leveraging multi-agent orchestration to accelerate pharmaceutical research, analyze molecular structures, and identify novel therapeutic applications.",
+      description: "AI-powered drug repurposing platform utilizing multi-agent orchestration to accelerate molecular research and discover novel therapeutics.",
       tech: "React, Node.js, AI Studio",
       features: ["Custom AI Agents", "Embeddable widgets", "Model routing"],
       github: "https://github.com/dinesh4o/Blueprints",
@@ -84,6 +84,14 @@ const ProjectsPage = () => {
       {/* 3D Flying Cards Container - Takes the REST of the height so it never overlaps the header */}
       <div className="w-full flex-1 z-20 flex items-center justify-center min-h-0 relative">
         <FlyingCards projects={projects} />
+      </div>
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2 pointer-events-none opacity-50 animate-pulse">
+        <span className="text-[10px] font-mono tracking-widest text-white uppercase">Scroll to explore</span>
+        <div className="w-4 h-7 border border-white/50 rounded-full flex justify-center p-1">
+          <div className="w-1 h-1.5 bg-white rounded-full animate-bounce"></div>
+        </div>
       </div>
 
     </main>

@@ -278,6 +278,7 @@ const TechCarousel = () => {
     { name: "HTML5", icon: <LayoutGrid className="w-4 h-4 text-gray-400" /> },
     { name: "CSS3", icon: <LayoutGrid className="w-4 h-4 text-gray-400" /> },
     { name: "JS", icon: <Code2 className="w-4 h-4 text-gray-400" /> },
+    { name: "n8n", icon: <Workflow className="w-4 h-4 text-gray-400" /> },
   ];
 
   const row1 = [...techStack, ...techStack, ...techStack];
@@ -524,7 +525,7 @@ const LandingPage = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/80 via-transparent to-[#050505] pointer-events-none z-0"></div>
 
       <div className="max-w-[1800px] w-full mx-auto px-6 lg:px-10 pt-8 pb-12 relative z-10 min-h-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 flex-1">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 flex-1 mb-10 lg:mb-12">
           <div className="lg:col-span-7 xl:col-span-8 flex flex-col justify-start z-20 w-full pr-0 lg:pr-4">
             <div className="space-y-3 mb-8 relative">
               <div className="text-[#8b949e] font-mono text-sm flex items-center gap-2 mb-2">
@@ -553,23 +554,27 @@ const LandingPage = () => {
               </SpotlightCard>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
-              <SpotlightCard className="p-5 flex flex-col justify-between group min-h-[140px] z-20">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-sm font-bold text-white flex items-center gap-2">
-                    <Radio className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" /> Live Network Status
-                  </h3>
-                  <div className="flex items-end h-5 gap-1 overflow-hidden">
-                    {[...Array(6)].map((_, i) => (
-                      <div key={i} className="ping-bar" style={{ animationDelay: `${i * 0.15}s` }}></div>
-                    ))}
+              <a href="https://leetcode.com/u/Aniruth_Pvt/" target="_blank" rel="noopener noreferrer" className="block z-20 cursor-pointer hover:scale-[1.02] transition-transform duration-300">
+                <SpotlightCard className="p-5 flex flex-col justify-between group min-h-[140px] h-full border border-[#222] hover:border-[#555] transition-colors">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-sm font-bold text-white flex items-center gap-2">
+                      <Activity className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" /> Development Activity
+                    </h3>
+                    <div className="flex items-end h-5 gap-1 overflow-hidden">
+                      <div className="w-1 bg-[#10b981]/40 h-2"></div>
+                      <div className="w-1 bg-[#10b981]/60 h-4"></div>
+                      <div className="w-1 bg-[#10b981]/80 h-3"></div>
+                      <div className="w-1 bg-[#10b981] h-5"></div>
+                      <div className="w-1 bg-white h-full animate-pulse shadow-[0_0_8px_#fff]"></div>
+                    </div>
                   </div>
-                </div>
-                <p className="text-xs font-mono text-[#8b949e] leading-relaxed">Routing agentic workflows securely. All pipelines actively responding.</p>
-                <div className="mt-4 pt-3 border-t border-[#222] flex justify-between text-[10px] font-mono">
-                  <span className="text-black bg-white px-2 py-0.5 rounded font-bold">99.9% UPTIME</span>
-                  <span className="text-gray-500">12ms LATENCY</span>
-                </div>
-              </SpotlightCard>
+                  <p className="text-xs font-mono text-[#8b949e] leading-relaxed">Consistently shipping code, solving complex algorithmic problems, and optimizing backend systems.</p>
+                  <div className="mt-4 pt-3 border-t border-[#222] flex justify-between text-[10px] font-mono">
+                    <span className="text-black bg-white px-2 py-0.5 rounded font-bold">300+ SOLVED</span>
+                    <span className="text-gray-500">O(1) COMPLEXITY</span>
+                  </div>
+                </SpotlightCard>
+              </a>
 
               <SpotlightCard className="p-5 flex flex-col justify-between group min-h-[140px] relative z-20">
                 <div className="absolute right-[-10px] top-[-10px] opacity-[0.03] group-hover:opacity-10 transition-opacity duration-500 pointer-events-none">
@@ -592,8 +597,8 @@ const LandingPage = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-5 xl:col-span-4 relative min-h-[600px] pointer-events-none z-30 flex justify-center items-start mt-10 lg:mt-0">
-            <div className="absolute inset-0 w-full h-full flex justify-center pointer-events-auto">
+          <div className="lg:col-span-5 xl:col-span-4 relative min-h-[500px] xl:min-h-[550px] pointer-events-none z-30 flex justify-center items-start mt-10 lg:-mt-10 xl:-mt-16">
+            <div className="absolute top-0 w-full max-w-[350px] mx-auto h-[500px] xl:h-[600px] flex justify-center pointer-events-auto">
               <Lanyard position={[0, 0, 16]} gravity={[0, -40, 0]} cardImage="/profile.jpeg" />
             </div>
           </div>
@@ -630,8 +635,8 @@ const AboutPage = () => {
         <div className="space-y-4 pt-4">
           <h1 className="text-3xl md:text-4xl font-bold text-white flex items-center mb-2 w-fit">
             <span className="text-[#f59e0b] mr-3 text-2xl font-mono">{'>'}</span>
-            <span key={typingKey} className="typing-container text-white">System Architecture & Metrics</span>
-            <span className="cursor-blink bg-[#f59e0b]"></span>
+            <span key={typingKey} className="typing-container text-white pb-1">System Architecture & Metrics</span>
+            <span className="cursor-blink bg-[#f59e0b] ml-1"></span>
           </h1>
           <div className="text-[#7f848e] font-mono text-sm mb-6">// background, experience, and skills</div>
 
@@ -692,9 +697,9 @@ const AboutPage = () => {
               </span>
             </div>
             <div className="p-5 flex-1 flex flex-col justify-center gap-5">
-              <div className="flex items-center justify-between border-b border-[#222] pb-3"><div className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-white"></div><span className="text-[13px] font-mono text-gray-300">Agentic_Router_API</span></div><div className="flex items-center gap-3"><span className="text-[11px] text-[#e5c07b] font-mono">12ms</span><span className="text-[11px] text-[#00e59b] font-mono">ONLINE</span></div></div>
-              <div className="flex items-center justify-between border-b border-[#222] pb-3"><div className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-gray-400"></div><span className="text-[13px] font-mono text-gray-300">Vector_Embeddings</span></div><div className="flex items-center gap-3"><span className="text-[11px] text-[#e5c07b] font-mono">45ms</span><span className="text-[11px] text-[#00e59b] font-mono">ONLINE</span></div></div>
-              <div className="flex items-center justify-between border-b border-[#222] pb-3"><div className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-gray-600"></div><span className="text-[13px] font-mono text-gray-300">Auth_Gateway</span></div><div className="flex items-center gap-3"><span className="text-[11px] text-[#e5c07b] font-mono">18ms</span><span className="text-[11px] text-[#00e59b] font-mono">ONLINE</span></div></div>
+              <div className="flex items-center justify-between border-b border-[#222] pb-3"><div className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div><span className="text-[13px] font-mono text-gray-300">Luvara_Platform</span></div><div className="flex items-center gap-3"><span className="text-[11px] text-[#e5c07b] font-mono">12ms</span><span className="text-[11px] text-[#00e59b] font-mono">ONLINE</span></div></div>
+              <div className="flex items-center justify-between border-b border-[#222] pb-3"><div className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-pulse"></div><span className="text-[13px] font-mono text-gray-300">Aurex_Creative_AI</span></div><div className="flex items-center gap-3"><span className="text-[11px] text-[#e5c07b] font-mono">45ms</span><span className="text-[11px] text-[#00e59b] font-mono">ONLINE</span></div></div>
+              <div className="flex items-center justify-between border-b border-[#222] pb-3"><div className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-gray-600 animate-pulse"></div><span className="text-[13px] font-mono text-gray-300">Lawbridge_iCube</span></div><div className="flex items-center gap-3"><span className="text-[11px] text-[#e5c07b] font-mono">18ms</span><span className="text-[11px] text-[#00e59b] font-mono">ONLINE</span></div></div>
             </div>
           </div>
         </div>
@@ -720,10 +725,11 @@ const AboutPage = () => {
               <Cpu className="w-4 h-4 text-gray-500" /> Core Technologies
             </h3>
             <div className="space-y-6 flex-1 relative z-10">
+              <SkillCategory title="Areas of Interest" skills={["Agentic AI", "Drug Repurposing", "Autonomous Workflows", "Cybersecurity"]} />
               <SkillCategory title="Languages" skills={["Python", "TypeScript", "C++", "Java", "SQL"]} />
               <SkillCategory title="AI & Data" skills={["TensorFlow", "Scikit-Learn", "Vector DBs", "RAG", "LLMs"]} />
               <SkillCategory title="Frontend" skills={["React", "Next.js", "Tailwind CSS", "Three.js"]} />
-              <SkillCategory title="Backend & Ops" skills={["Node.js", "Kubernetes", "Docker", "AWS", "Git"]} />
+              <SkillCategory title="Backend & Ops" skills={["Node.js", "FastAPI", "REST API", "Kubernetes", "AWS"]} />
             </div>
           </div>
 
@@ -755,15 +761,23 @@ const AboutPage = () => {
           </div>
 
           <div className="md:col-span-12 rounded-xl border border-[#222] bg-[#0a0a0a] p-8 transition-all duration-500 hover:-translate-y-1 hover:border-white/30 hover:shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-4">
               <h3 className="text-[10px] uppercase tracking-widest text-gray-500 font-bold flex items-center gap-2">
-                <Workflow className="w-3 h-3 text-gray-500" /> Core RAG Workflow Architecture
+                <Workflow className="w-3 h-3 text-gray-500" /> Agentic RAG Workflow Architecture
               </h3>
               <span className="text-[10px] font-mono text-black flex items-center gap-1.5 border border-white bg-white px-3 py-1 rounded-full font-bold">
                 <span className="w-1.5 h-1.5 rounded-full bg-black animate-pulse"></span>
                 Live Pipeline
               </span>
             </div>
+
+            <div className="mb-8 border-l-2 border-[#61afef] pl-4">
+              <p className="text-sm font-mono text-[#8b949e] leading-relaxed max-w-4xl">
+                <span className="text-[#61afef] font-bold">System Context:</span> I specialize in designing scalable, autonomous AI systems. 
+                Below is a high-level visualization of a production-grade <strong className="text-white font-normal">Retrieval-Augmented Generation (RAG)</strong> pipeline I frequently deploy to orchestrate multi-agent reasoning and securely route data for AI applications.
+              </p>
+            </div>
+
             <WorkflowVisualizer />
           </div>
         </div>
