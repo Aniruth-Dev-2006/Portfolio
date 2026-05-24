@@ -11,7 +11,7 @@ const ReferencePage = () => {
       description: "AI Studio full-stack application built to instantly deploy custom AI agents. Connect to various models, configure personalities, and embed anywhere.",
       tech: "React, Node.js, AI Studio",
       features: ["Custom AI Agents", "Embeddable widgets", "Model routing"],
-      github: "https://github.com/dinesh4o/Blueprints",
+      github: "https://github.com/Aniruth-Dev-2006/Luvara",
       live: "https://luvara.vercel.app/",
       stars: 12,
       year: 2024
@@ -21,7 +21,7 @@ const ReferencePage = () => {
       description: "AI-powered ad creative platform for generating, editing, adapting, and publishing campaign creatives. Features a drag-and-drop canvas editor.",
       tech: "React, Node.js, MongoDB, Groq AI",
       features: ["Copy Generation", "Canvas Editor", "Meta Graph API"],
-      github: "https://github.com/dinesh4o/Aurex",
+      github: "https://github.com/Aniruth-Dev-2006/Aurex",
       live: "https://aurexai.vercel.app/",
       stars: 8,
       year: 2024
